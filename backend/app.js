@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // rest api route
-app.use('/api/users', usersRouter);
+app.use('/api/v1/users', usersRouter);
 
 // use react resource.
 app.use(express.static(path.join(__dirname, '../frontend/build')));
