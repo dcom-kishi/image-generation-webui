@@ -1,1 +1,1 @@
-# stable-diffusion-webui
+# image-generation-webui
