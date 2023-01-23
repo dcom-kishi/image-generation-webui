@@ -1,23 +1,17 @@
 {
   "name": "image-generation-webui",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "0.0.0",
+  "private": true,
+  "main": "app.js",
   "scripts": {
-    "postinstall": "(cd ./frontend && npm install) && (cd ../backend && npm install)",
-    "start": "cd ./backend && npm run start",
-    "build": "cd ./frontend && npm run build",
-    "dev": "cd ./backend && npm run dev"
+    "start": "node ./bin/www"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dcom-kishi/image-generation-webui.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/dcom-kishi/image-generation-webui/issues"
-  },
-  "homepage": "https://github.com/dcom-kishi/image-generation-webui#readme"
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
+    "morgan": "~1.9.1"
+  }
 }
