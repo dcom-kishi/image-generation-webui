@@ -2,4 +2,9 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  #canvas-div
+    canvas(id='canvas', width='512', height='512', style='border:1px solid #d3d3d3;')
+  #textarea-div
+    textarea(rows="5" cols="60" name="text" placeholder="Enter the prompt. ex) panda", style='width:512px; margin: 10px 0px 10px 0px;')
+  #button-div
+    button(type='submit') subbmit
