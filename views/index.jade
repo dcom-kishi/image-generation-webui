@@ -1,10 +1,59 @@
 extends layout
 
+block scripts
+  script(type='text/javascript').
+    function onClick() {
+      let text = document.getElementById('textarea')
+      let slider = document.getElementById('slider');
+      let payload = {
+        "prompt": text.value,
+        "steps": slider.value,
+      }
+      fetch("/api/v1/image/txt2img", {
+        method: "POST",
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+      .then((res) => res.json())
+      .then(function(json) {
+        console.log("json: ", json);
+        let canvas = document.getElementById('canvas');
+        let content = canvas.getContext('2d');
+        let img = new Image();
+        img.src = 'data:image/png;base64,' + json['images'][0]
+        img.onload = function() {
+          content.drawImage(img, 0, 0, 512, 512);
+        }
+      });
+    }
+
+    function setSliderValue() {
+      let slider = document.getElementById('slider');
+      let textSpan = document.getElementById('text-span');
+      textSpan.innerText = slider.value;
+    }
+
+    function onChange() {
+      setSliderValue();
+    }
+
+    window.onload = () => {
+      setSliderValue();
+    }
+
 block content
   h1= title
   #canvas-div
     canvas(id='canvas', width='512', height='512', style='border:1px solid #d3d3d3;')
   #textarea-div
-    textarea(rows="5" cols="60" name="text" placeholder="Enter the prompt. ex) panda", style='width:512px; margin: 10px 0px 10px 0px;')
+    textarea(id='textarea', rows='5', cols='60', placeholder='Enter the prompt. ex) panda', style='width:512px; margin: 10px 0px 10px 0px;')
+  #slider-div
+    input(type="range", id="slider", oninput='onChange()', min="1", max="100", step="1", value="10")
+    p
+      | steps: 
+      span(id="text-span")
   #button-div
-    button(type='submit') subbmit
+    button(type='submit', onclick='onClick()') subbmit
